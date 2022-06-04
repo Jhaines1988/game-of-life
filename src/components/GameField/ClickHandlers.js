@@ -61,12 +61,39 @@ const MouseEvents = () => {
   const onMouseUpHandler = ({ nativeEvent }) => {
     setIsHoldingClick(false);
   };
+  const createWorldGrid = () => {
+    const world = [];
+    for (let i = 0; i < rows; i++) {
+      const row = [];
+      for (let j = 0; j < cols; j++) {
+        row.push(
+          <div
+            onClick={toggleCells}
+            onMouseDown={onMouseDownHandler}
+            onMouseUp={onMouseUpHandler}
+            onMouseOver={onMouseOverHandler}
+            key={`${i}_${j}`}
+            id={`${i}_${j}`}
+            className='cell dead'></div>
+        );
+      }
+      world.push(row);
+    }
+    return world.map((divData, i) => divData);
+  };
 
+  const resetWorldGrid = () => {
+    const world = document.querySelectorAll('.game-field');
+    const cells = world[0].childNodes;
+    for (let node = 0; node < cells.length; node++) {
+      const cell = cells[node];
+      cell.className = 'cell dead';
+    }
+    generateCells();
+  };
   return {
-    toggleCells,
-    onMouseDownHandler,
-    onMouseOverHandler,
-    onMouseUpHandler,
+    createWorldGrid,
+    resetWorldGrid,
     currentGenerationRef,
     nextGenerationRef,
   };

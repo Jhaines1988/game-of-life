@@ -1,0 +1,14 @@
+.controls-container {
+  margin: 4rem 0;
+  display: flex;
+  justify-content: center;
+}
+
+.button-container {
+  display: flex;
+  gap: 5px;
+}
+
+.evolution-time {
+  font-weight: bold;
+}

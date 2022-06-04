@@ -1,6 +1,8 @@
 import React from 'react';
 import GameField from './components/GameField/GameField';
 import Title from './components/GameTitle/Title';
+
+import './App.css';
 /*
 RULES:
 Birth: An empty or dead cell with exactly three live neighbors becomes alive
@@ -10,10 +12,10 @@ Survival: A live cell with two or three neighbors remains alive
 */
 function App() {
   return (
-    <>
+    <div className='app-container'>
       <Title title='The Game Of Life'></Title>
       <GameField />
-    </>
+    </div>
   );
 }
 
