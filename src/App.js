@@ -1,24 +1,19 @@
-import logo from './logo.svg';
-import './App.css';
-
+import React from 'react';
+import GameField from './components/GameField/GameField';
+import Title from './components/GameTitle/Title';
+/*
+RULES:
+Birth: An empty or dead cell with exactly three live neighbors becomes alive
+Death: A live cell with 0 or one neighbors dies of isolation
+       A live cell with 4 or more neighbors dies of overcrowding
+Survival: A live cell with two or three neighbors remains alive
+*/
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Title title='The Game Of Life'></Title>
+      <GameField />
+    </>
   );
 }
 

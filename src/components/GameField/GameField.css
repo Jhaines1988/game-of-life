@@ -1,0 +1,24 @@
+.game-field {
+  display: grid;
+  height: 100%;
+  width: 100%;
+  /* gap: 2px; */
+  grid-template-columns: repeat(50, 14px);
+  grid-template-rows: repeat(50, 14px);
+  justify-content: center;
+  align-content: center;
+}
+.cell {
+  background-color: whitesmoke;
+  border: 2px solid darkgray;
+}
+
+.dead {
+  background-color: transparent;
+  border: 2px solid darkgray;
+}
+
+.alive {
+  background-color: blue;
+  border: 2px solid darkgray;
+}
