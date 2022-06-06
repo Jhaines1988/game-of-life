@@ -3,6 +3,7 @@ export default function createNextGeneration(
   currentGeneration,
   nextGeneration
 ) {
+  let nextGenerationLivingCount = 0;
   for (var row = 0; row < currentGeneration.length; row++) {
     for (var col = 0; col < currentGeneration[row].length; col++) {
       let neighbors = countNeighbors(row, col, currentGeneration);
@@ -11,16 +12,21 @@ export default function createNextGeneration(
           nextGeneration[row][col] = 0;
         } else if (neighbors === 2 || neighbors === 3) {
           nextGeneration[row][col] = 1;
+          nextGenerationLivingCount++;
         } else if (neighbors > 3) {
           nextGeneration[row][col] = 0;
         }
       } else if (currentGeneration[row][col] === 0) {
         if (neighbors === 3) {
           nextGeneration[row][col] = 1;
+          nextGenerationLivingCount++;
         }
       }
     }
   }
 
-  return [currentGeneration, nextGeneration];
+  if (nextGenerationLivingCount === 0) {
+    return false;
+  }
+  return true;
 }

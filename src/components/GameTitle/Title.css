@@ -1,6 +1,7 @@
 .title-container {
   display: flex;
   justify-content: center;
+  grid-column: 1/4;
 }
 .title {
   color: #1cff1c;

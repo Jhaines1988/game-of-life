@@ -1,9 +1,15 @@
 .controls-container {
-  margin: 4rem 0;
   display: flex;
-  justify-content: center;
-}
 
+  grid-column: 2;
+  grid-row: 3;
+
+  flex-direction: column;
+  align-items: center;
+}
+.heading {
+  color: #1cff1c;
+}
 .button-container {
   display: flex;
   gap: 5px;

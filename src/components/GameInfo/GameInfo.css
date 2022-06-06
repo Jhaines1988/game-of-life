@@ -1,2 +1,24 @@
 .game-info-container {
+  color: #1cff1c;
+  justify-self: center;
+  align-self: center;
+  display: flex;
+  grid-row: 2;
+  grid-column: 1;
+  flex-direction: column;
+}
+.heading-2 {
+  grid-column: 3;
+  grid-row: 2;
+  align-self: start;
+  justify-self: center;
+}
+.game-info-label {
+  font-weight: bold;
+  color: rgb(199 127 255);
+}
+
+.game-info-label > span {
+  font-weight: 400;
+  color: #1cff1c;
 }

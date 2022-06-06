@@ -1,12 +1,9 @@
 .game-field {
   display: grid;
-  height: 100%;
-  width: 100%;
-  /* gap: 2px; */
   grid-template-columns: repeat(50, 14px);
   grid-template-rows: repeat(50, 14px);
   justify-content: center;
-  align-content: center;
+  grid-column: 2;
 }
 .cell,
 .dead,

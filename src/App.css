@@ -4,4 +4,8 @@ html * {
 
 .app-container {
   display: grid;
+  grid-template-columns: 197px 700px 200px;
+  grid-template-rows: 80px 1fr 200px;
+  justify-content: center;
+  gap: 0.5rem;
 }

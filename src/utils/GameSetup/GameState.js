@@ -1,13 +1,34 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useReducer } from 'react';
+const rows = 50;
+const cols = 50;
 
-const MouseEvents = () => {
+const initialGenerationState = {
+  generationNumber: 0,
+  isExtinct: true,
+};
+
+const reducer = (state, action) => {
+  switch (action.type) {
+    case 'EXTINCTION':
+      return { generationNumber: 0, isExtinct: true };
+    case 'SURVIVAL':
+      return { generationNumber: state.generationNumber + 1, isExtinct: false };
+    default:
+      return state;
+  }
+};
+
+const GameState = () => {
   const [isHoldingClick, setIsHoldingClick] = useState(false);
   const currentGenerationRef = useRef(null);
   const nextGenerationRef = useRef(null);
-  const rows = 50;
-  const cols = 50;
-
+  const evolutionStartStopRef = useRef(null);
+  const evolutionTimeRef = useRef(300);
+  const [generationSurvivalState, dispatch] = useReducer(
+    reducer,
+    initialGenerationState
+  );
   useEffect(() => {
     generateCells();
   }, []);
@@ -16,20 +37,9 @@ const MouseEvents = () => {
     const currentGen = [];
     const nextGen = [];
     for (let i = 0; i < rows; i++) {
-      currentGen[i] = new Array(cols);
-      nextGen[i] = new Array(cols);
+      currentGen[i] = new Array(cols).fill(0);
+      nextGen[i] = new Array(cols).fill(0);
     }
-    initializeGenerations(currentGen, nextGen);
-  };
-
-  const initializeGenerations = (currentGen, nextGen) => {
-    for (let i = 0; i < rows; i++) {
-      for (let j = 0; j < cols; j++) {
-        currentGen[i][j] = 0;
-        nextGen[i][j] = 0;
-      }
-    }
-
     currentGenerationRef.current = currentGen;
     nextGenerationRef.current = nextGen;
   };
@@ -90,13 +100,18 @@ const MouseEvents = () => {
       cell.className = 'cell dead';
     }
     generateCells();
+    dispatch({ type: 'EXTINCTION' });
   };
   return {
     createWorldGrid,
     resetWorldGrid,
+    dispatch,
+    generationSurvivalState,
     currentGenerationRef,
     nextGenerationRef,
+    evolutionStartStopRef,
+    evolutionTimeRef,
   };
 };
 
-export default MouseEvents;
+export default GameState;
