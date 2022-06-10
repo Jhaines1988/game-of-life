@@ -1,8 +1,8 @@
 import React from 'react';
-import Button from '../../components/MainButton/Button';
-import createNextGeneration from '../Helpers /CreateNextGeneration';
-import updateCurrentGeneration from '../Helpers /UpdateCurrentGeneration';
-import updateGameWorld from '../Helpers /UpdateGameWorld';
+import Button from '../MainButton/Button';
+import createNextGeneration from '../../utils/CreateNextGeneration';
+import updateCurrentGeneration from '../../utils/UpdateCurrentGeneration';
+import updateGameWorld from '../../utils/UpdateGameWorld';
 
 import './GameControls.css';
 const GameControls = (props) => {
@@ -47,6 +47,7 @@ const GameControls = (props) => {
   const reset = () => {
     stopEvolving();
     resetWorldGrid();
+    dispatch({ type: 'EXTINCTION' });
   };
 
   const increaseEvolveTime = () => {

@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useReducer, useRef } from 'react';
 import Title from './components/GameTitle/Title';
-import GameState from './utils/GameSetup/GameState';
+import GameState from './Helpers/GameSetup/GameState';
 import GameWorld from './components/GameWorld/GameWorld';
-import GameControls from './utils/GameSetup/GameControls';
+import GameControls from './components/GameControls/GameControls';
 import GameInfo from './components/GameInfo/GameInfo';
 import './App.css';
 /*
@@ -12,17 +12,30 @@ Death: A live cell with 0 or one neighbors dies of isolation
        A live cell with 4 or more neighbors dies of overcrowding
 Survival: A live cell with two or three neighbors remains alive
 */
+const initialGenerationState = {
+  generationNumber: 0,
+  isExtinct: true,
+};
+
+const reducer = (state, action) => {
+  switch (action.type) {
+    case 'EXTINCTION':
+      return { generationNumber: 0, isExtinct: true };
+    case 'SURVIVAL':
+      return { generationNumber: state.generationNumber + 1, isExtinct: false };
+    default:
+      return state;
+  }
+};
+
 function App() {
   const {
     createWorldGrid,
     resetWorldGrid,
-    dispatch,
-    generationSurvivalState,
     currentGenerationRef,
     nextGenerationRef,
-    evolutionStartStopRef,
-    evolutionTimeRef,
   } = GameState();
+
   const [evolutionTimeDisplay, setEvolutionTimeDisplay] = useState('300ms');
   const changeTimeDisplay = (maxSpeed) => {
     if (maxSpeed) {
@@ -31,7 +44,12 @@ function App() {
     }
     setEvolutionTimeDisplay(evolutionTimeRef.current + 'ms');
   };
-
+  const [generationSurvivalState, dispatch] = useReducer(
+    reducer,
+    initialGenerationState
+  );
+  const evolutionStartStopRef = useRef(null);
+  const evolutionTimeRef = useRef(300);
   return (
     <div className='app-container'>
       <Title title='The Game Of Life'></Title>

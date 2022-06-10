@@ -1,34 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect, useRef, useState, useReducer } from 'react';
+import { useEffect, useRef, useState } from 'react';
 const rows = 50;
 const cols = 50;
 
-const initialGenerationState = {
-  generationNumber: 0,
-  isExtinct: true,
-};
-
-const reducer = (state, action) => {
-  switch (action.type) {
-    case 'EXTINCTION':
-      return { generationNumber: 0, isExtinct: true };
-    case 'SURVIVAL':
-      return { generationNumber: state.generationNumber + 1, isExtinct: false };
-    default:
-      return state;
-  }
-};
-
 const GameState = () => {
-  const [isHoldingClick, setIsHoldingClick] = useState(false);
   const currentGenerationRef = useRef(null);
   const nextGenerationRef = useRef(null);
-  const evolutionStartStopRef = useRef(null);
-  const evolutionTimeRef = useRef(300);
-  const [generationSurvivalState, dispatch] = useReducer(
-    reducer,
-    initialGenerationState
-  );
+  const [isHoldingClick, setIsHoldingClick] = useState(false);
+
   useEffect(() => {
     generateCells();
   }, []);
@@ -46,10 +25,9 @@ const GameState = () => {
 
   const toggleCells = ({ nativeEvent }) => {
     const targetCell = nativeEvent.target;
-    let cellLocation = targetCell.id.split('_');
-
-    let cellRow = Number(cellLocation[0]);
-    let cellColumn = Number(cellLocation[1]);
+    const cellLocation = targetCell.id.split('_');
+    const cellRow = Number(cellLocation[0]);
+    const cellColumn = Number(cellLocation[1]);
     if (targetCell.className === 'alive') {
       targetCell.className = 'dead';
       currentGenerationRef.current[cellRow][cellColumn] = 0;
@@ -59,7 +37,7 @@ const GameState = () => {
     }
   };
 
-  const onMouseDownHandler = ({ nativeEvent }) => {
+  const onMouseDownHandler = () => {
     setIsHoldingClick(true);
   };
 
@@ -68,7 +46,7 @@ const GameState = () => {
       toggleCells({ nativeEvent });
     }
   };
-  const onMouseUpHandler = ({ nativeEvent }) => {
+  const onMouseUpHandler = () => {
     setIsHoldingClick(false);
   };
   const createWorldGrid = () => {
@@ -89,7 +67,7 @@ const GameState = () => {
       }
       world.push(row);
     }
-    return world.map((divData, i) => divData);
+    return world.map((div, i) => div);
   };
 
   const resetWorldGrid = () => {
@@ -100,17 +78,12 @@ const GameState = () => {
       cell.className = 'cell dead';
     }
     generateCells();
-    dispatch({ type: 'EXTINCTION' });
   };
   return {
     createWorldGrid,
     resetWorldGrid,
-    dispatch,
-    generationSurvivalState,
     currentGenerationRef,
     nextGenerationRef,
-    evolutionStartStopRef,
-    evolutionTimeRef,
   };
 };
 
