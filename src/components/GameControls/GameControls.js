@@ -10,8 +10,8 @@ const GameControls = (props) => {
   const [currentGenerationRef, nextGenerationRef] = props.generations;
   const [evolutionStartStopRef, evolutionTimeRef] = props.evolutionTimeRefs;
   const resetWorldGrid = props.resetWorldGrid;
-  const changeTimeDisplay = props.changeTimeDisplay;
   const dispatch = props.dispatch;
+  const changeTimeDisplay = props.changeTimeDisplay;
   //----------------------------------------------------
 
   // Button Controls
@@ -34,6 +34,9 @@ const GameControls = (props) => {
     updateGameWorld(currentGenerationRef.current);
   };
   const evolve = () => {
+    if (evolutionStartStopRef.current) {
+      stopEvolving();
+    }
     const intervalId = setInterval(() => {
       start();
     }, evolutionTimeRef.current);

@@ -6,19 +6,34 @@
   grid-row: 2;
   grid-column: 1;
   flex-direction: column;
+  gap: 8px;
 }
 .heading-2 {
   grid-column: 3;
   grid-row: 2;
   align-self: start;
   justify-self: center;
+  margin: 0;
 }
 .game-info-label {
   font-weight: bold;
   color: rgb(199 127 255);
+  margin: 0;
 }
 
 .game-info-label > span {
   font-weight: 400;
   color: #1cff1c;
+}
+
+.instructions-container {
+  align-self: center;
+  padding: 1rem;
+  color: #1cff1c;
+}
+.instructions-header {
+  font-size: 24px;
+}
+.instructions {
+  font-weight: 500;
 }

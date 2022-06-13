@@ -10,35 +10,35 @@ export default function countNeighbors(
   let column_number = Number(col);
 
   if (row_number - 1 >= 0) {
-    if (currentGeneration[row_number - 1][column_number] === 1) count++;
+    count += currentGeneration[row_number - 1][column_number];
   }
 
   if (row_number - 1 >= 0 && column_number - 1 >= 0) {
-    if (currentGeneration[row_number - 1][column_number - 1] === 1) count++;
+    count += currentGeneration[row_number - 1][column_number - 1];
   }
 
   if (row_number - 1 >= 0 && column_number + 1 < cols) {
-    if (currentGeneration[row_number - 1][column_number + 1] === 1) count++;
+    count += currentGeneration[row_number - 1][column_number + 1];
   }
 
   if (column_number - 1 >= 0) {
-    if (currentGeneration[row_number][column_number - 1] === 1) count++;
+    count += currentGeneration[row_number][column_number - 1];
   }
 
   if (column_number + 1 < cols) {
-    if (currentGeneration[row_number][column_number + 1] === 1) count++;
+    count += currentGeneration[row_number][column_number + 1];
   }
 
   if (row_number + 1 < rows && column_number - 1 >= 0) {
-    if (currentGeneration[row_number + 1][column_number - 1] === 1) count++;
+    count += currentGeneration[row_number + 1][column_number - 1];
   }
 
   if (row_number + 1 < rows && column_number + 1 < cols) {
-    if (currentGeneration[row_number + 1][column_number + 1] === 1) count++;
+    count += currentGeneration[row_number + 1][column_number + 1];
   }
 
   if (row_number + 1 < rows) {
-    if (currentGeneration[row_number + 1][column_number] === 1) count++;
+    count += currentGeneration[row_number + 1][column_number];
   }
 
   return count;

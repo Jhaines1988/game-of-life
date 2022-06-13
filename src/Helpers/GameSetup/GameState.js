@@ -4,9 +4,9 @@ const rows = 50;
 const cols = 50;
 
 const GameState = () => {
+  const [isHoldingClick, setIsHoldingClick] = useState(false);
   const currentGenerationRef = useRef(null);
   const nextGenerationRef = useRef(null);
-  const [isHoldingClick, setIsHoldingClick] = useState(false);
 
   useEffect(() => {
     generateCells();

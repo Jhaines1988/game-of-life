@@ -36,20 +36,23 @@ function App() {
     nextGenerationRef,
   } = GameState();
 
+  const evolutionStartStopRef = useRef(null);
+  const evolutionTimeRef = useRef(300);
   const [evolutionTimeDisplay, setEvolutionTimeDisplay] = useState('300ms');
+
   const changeTimeDisplay = (maxSpeed) => {
     if (maxSpeed) {
-      setEvolutionTimeDisplay('Maximum Evolultion Speed!');
+      setEvolutionTimeDisplay('Maximum Evolution Speed!');
       return;
     }
     setEvolutionTimeDisplay(evolutionTimeRef.current + 'ms');
   };
+
   const [generationSurvivalState, dispatch] = useReducer(
     reducer,
     initialGenerationState
   );
-  const evolutionStartStopRef = useRef(null);
-  const evolutionTimeRef = useRef(300);
+
   return (
     <div className='app-container'>
       <Title title='The Game Of Life'></Title>
