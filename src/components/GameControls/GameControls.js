@@ -65,7 +65,7 @@ const GameControls = (props) => {
   };
 
   const decreaseEvolveTime = () => {
-    if (evolutionTimeRef.current === 0) {
+    if (evolutionTimeRef.current === 10) {
       changeTimeDisplay('Max Speed');
       return;
     }
